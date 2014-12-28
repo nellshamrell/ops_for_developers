@@ -63,4 +63,33 @@ Create an authorized_keys file in the ssh directory using whichever editor you p
 Paste the ssh key from your local machine into this file.  Save and quit the file.
 
 Leave your vagrant machine running, but open a new terminal shell on your local machine.
+
+SSH into your VM from the new shell as the deploy user following the appropriate guidelines below.
+
+### With Vagrant
+
+Vagrant VMs are a little complicated to ssh into outside of the normal vagrant commands.  In the same directory as your Vagrant file run:
+
+```bash
+(local) vagrant ssh-config > vagrant-ssh
+```
+
+Open vagrant ssh with your favorite text editor.  My favorite is vi/vim.
+
+```bash
+(local) vim vagrant-ssh
+```
+
+Change the User to deploy then change the IdentityFile to the path to your private ssh key (NOT the key itself, just the path).
+
+Next, ssh into your VM
+```bash
+(local) ssh -F vagrant-ssh default
+```
+
+### With AWS
+
+### With Azure
+
+
 ## 3. Install Ruby
