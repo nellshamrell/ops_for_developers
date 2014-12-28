@@ -64,7 +64,7 @@ Paste the ssh key from your local machine into this file.  Save and quit the fil
 
 Now it's time to try ssh'ing out the VM as the deploy user.  Follow the appropriate steps below.
 
-### With Vagrant
+### SSHing with Vagrant
 
 Leave your vagrant machine running, but open a new terminal shell on your local machine.
 
@@ -92,6 +92,41 @@ Next, ssh into your VM
 ### With AWS
 
 ### With Azure
+
+### Securing SSH 
+
+Now that SSH is installed, there are few needed steps to add security to the VM.  
+
+First, on your VM, edit the sshd_config with your editor of choice (here I use vi)
+
+```bash
+(local) $ sudo vi /etc/ssh/sshd_config
+```
+
+First, to disable root login via ssh change this line
+```bash
+PermitRootLogin without-password
+```
+to this
+```bash
+PermitRootLogin no
+```
+
+Then, to disable password authentication, change this line
+```bash
+PasswordAuthentication yes
+```
+
+to this 
+```bash
+PasswordAuthentication no
+```
+
+Save and quit the file, then restart the ssh service to load the changes
+
+```bash
+(VM) $ sudo /etc/init.d/ssh restart
+```
 
 ## 3. Install Ruby
 
