@@ -171,3 +171,48 @@ If everything is set up correctly, you should see this when you run the previous
 (VM) $ ruby -v
 ruby 2.1.3p242 (2014-09-19 revision 47630) [x86_64-linux]
 ```
+
+## 4. Install Apache
+```bash
+(VM) $ sudo apt-get install apache2
+```
+Next, we need to verify that Apache is working on the VM.  To do this from the command line, run 
+
+```bash
+(VM) $ wget -qO- 127.0.0.1
+```
+
+If Apache is installed correctly, the command line will output an html document which includes the words "It works!"
+
+Now to verify that the VM can be accessed through a web browser.
+
+### If you are using Vagrant
+
+At this point, even with Apache installed, we cannot access the VM in the browser.
+
+To fix this, open up your VagrantFile on your local machine with the editor of your choice (I use Vim)
+
+```bash
+(Local) $ vim Vagrantfile
+```
+
+Locate this line in the Vagrantfile
+```bash
+# config.vm.network "forwarded_port", guest: 80, host: 8080
+```
+
+Uncomment out that line so it looks like this 
+```bash
+ config.vm.network "forwarded_port", guest: 80, host: 8080
+```
+
+Then save and quit the file.
+
+If your VM is still running, run this command to reload the configuration to include these changes.
+```bash
+ config.vm.network "forwarded_port", guest: 80, host: 8080
+```
+
+Now, access "http://127.0.0.1:8080/" in a browser and you should see the Apache2 Ubuntu Default Page.  It's a working web server!
+
+
