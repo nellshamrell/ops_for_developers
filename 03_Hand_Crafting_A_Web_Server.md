@@ -142,28 +142,32 @@ Then re-run
 Next, we need to source the rvm scripts directory and add it to the VM's .bashrc
 
 ```bash
-(VM) source ~/.rvm/scripts/rvm
+(VM) $ source ~/.rvm/scripts/rvm
 ```
 
 ```bash
-(VM) echo "source ~/.rvm/scripts/rvm" >> ~/.bashrc
+(VM) $ echo "source ~/.rvm/scripts/rvm" >> ~/.bashrc
 ```
 
 ### Installing Ruby
 
 First, we install Ruby 2.1.3
 ```bash
-rvm install 2.1.3
+(VM) $ rvm install 2.1.3
 ```
 
 Next, we tell RVM to use 2.1.3 as the default Ruby
 ```bash
-rvm use 2.1.3 --default
+(VM) $ rvm use 2.1.3 --default
 ```
 
 And, finally, it's time to check the Ruby version.
 ```bash
-ruby -v
+(VM) $ ruby -v
 ```
 
-If everything is set up correctly, you should see
+If everything is set up correctly, you should see this when you run the previous command
+```bash
+(VM) $ ruby -v
+ruby 2.1.3p242 (2014-09-19 revision 47630) [x86_64-linux]
+```
