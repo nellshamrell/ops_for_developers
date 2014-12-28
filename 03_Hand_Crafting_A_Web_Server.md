@@ -73,20 +73,20 @@ SSH into your VM from the new shell as the deploy user following the appropriate
 Vagrant VMs are a little complicated to ssh into outside of the normal vagrant commands.  In the same directory as your Vagrant file run:
 
 ```bash
-(local) vagrant ssh-config > vagrant-ssh
+(local) $ vagrant ssh-config > vagrant-ssh
 ```
 
 Open vagrant ssh with your favorite text editor.  My favorite is vi/vim.
 
 ```bash
-(local) vim vagrant-ssh
+(local) $ vim vagrant-ssh
 ```
 
 Change the User to deploy then change the IdentityFile to the path to your private ssh key (NOT the key itself, just the path).
 
 Next, ssh into your VM
 ```bash
-(local) ssh -F vagrant-ssh default
+(local) $ ssh -F vagrant-ssh default
 ```
 
 ### With AWS
@@ -97,21 +97,73 @@ Next, ssh into your VM
 
 In order to install Ruby on our VM, we first need to add some packages to the systems.
 
+### Updating and Installing Dependencies
+
 First, update Ubuntu itself by running
  
 TODO: Troubleshoot why sudo is still requiring password - check info at https://help.ubuntu.com/10.04/serverguide/openssh-server.html
 ```bash
-(VM) sudo apt-get update
+(VM) $ sudo apt-get update
 ```
 
 Then add in some dependencies for Ruby
 
 ```bash
-(VM) sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties
+(VM) $ sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties
 ```
 
 There are a few different ways to install Ruby.  For this tutorial we're going to use [RVM](https://rvm.io/)
 
+### Installing RVM
 
+First, install some dependencies required by RVM
+```bash
+(VM) $ sudo apt-get install libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
+```
 
+Next, retrieve RVM and install
 
+```bash
+(VM) $ curl -L https://get.rvm.io | bash -s stable
+```
+
+NOTE: If you receive an error "gpg: Can't check signature: public key not found", run this command to install the required key
+```bash
+(VM) $ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+```
+
+Then re-run 
+
+```bash
+(VM) $ curl -L https://get.rvm.io | bash -s stable
+```
+
+### Sourcing RVM
+Next, we need to source the rvm scripts directory and add it to the VM's .bashrc
+
+```bash
+(VM) source ~/.rvm/scripts/rvm
+```
+
+```bash
+(VM) echo "source ~/.rvm/scripts/rvm" >> ~/.bashrc
+```
+
+### Installing Ruby
+
+First, we install Ruby 2.1.3
+```bash
+rvm install 2.1.3
+```
+
+Next, we tell RVM to use 2.1.3 as the default Ruby
+```bash
+rvm use 2.1.3 --default
+```
+
+And, finally, it's time to check the Ruby version.
+```bash
+ruby -v
+```
+
+If everything is set up correctly, you should see
