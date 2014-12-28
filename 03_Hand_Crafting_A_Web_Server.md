@@ -94,3 +94,24 @@ Next, ssh into your VM
 ### With Azure
 
 ## 3. Install Ruby
+
+In order to install Ruby on our VM, we first need to add some packages to the systems.
+
+First, update Ubuntu itself by running
+ 
+TODO: Troubleshoot why sudo is still requiring password - check info at https://help.ubuntu.com/10.04/serverguide/openssh-server.html
+```bash
+(VM) sudo apt-get update
+```
+
+Then add in some dependencies for Ruby
+
+```bash
+(VM) sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties
+```
+
+There are a few different ways to install Ruby.  For this tutorial we're going to use [RVM](https://rvm.io/)
+
+
+
+
