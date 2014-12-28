@@ -210,9 +210,16 @@ Then save and quit the file.
 
 If your VM is still running, run this command to reload the configuration to include these changes.
 ```bash
- config.vm.network "forwarded_port", guest: 80, host: 8080
+ vagrant reload
 ```
 
 Now, access "http://127.0.0.1:8080/" in a browser and you should see the Apache2 Ubuntu Default Page.  It's a working web server!
 
+## 5. Install Passenger
+
+## 6. Install PostgreSQL
+
+## 7. Set Up Capistrano
+
+## 8. Deploying with Capistrano
 
