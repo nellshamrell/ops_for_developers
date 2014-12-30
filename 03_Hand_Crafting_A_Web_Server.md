@@ -286,9 +286,19 @@ Then restart Apache2
 ```bash
  sudo service apache2 restart
 ```
+Finally, verify that passenger is running with this command:
+```bash
+  passenger-memory-stats
+```
 
+You should see a list of processes.
 
 ## 6. Install PostgreSQL
+
+Install PostgreSQL with:
+```bash
+sudo apt-get install postgresql postgresql-contrib libpq-dev
+```
 
 ## 7. Set Up Capistrano
 
