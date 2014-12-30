@@ -252,6 +252,42 @@ Now, access "http://127.0.0.1:8080/" in a browser and you should see the Apache2
 
 ## 5. Install Passenger
 
+First, download and install the Passenger gem
+```bash
+ gem install passenger 
+```
+
+Use this command to set up Passenger
+```bash
+ passenger-install-apache2-module
+```
+
+This will guide you through the set up.
+Make sure to select Ruby as a language you prefer.
+
+If the installer advises you to install additional packages, go ahead and install them.  Then rerun
+```bash
+ passenger-install-apache2-module
+```
+
+If the installer advises you to add more swap memory, follow the directions to do this and re-run the installer again.
+
+Eventually, the installer will prompt you to add these lines to your Apache configuration file.  Paste these into /etc/apache2/apache2.conf
+
+```bash
+   LoadModule passenger_module /var/lib/gems/1.9.1/gems/passenger-4.0.56/buildout/apache2/mod_passenger.so
+   <IfModule mod_passenger.c>
+     PassengerRoot /var/lib/gems/1.9.1/gems/passenger-4.0.56
+     PassengerDefaultRuby /usr/bin/ruby1.9.1
+   </IfModule>
+```
+
+Then restart Apache2
+```bash
+ sudo service apache2 restart
+```
+
+
 ## 6. Install PostgreSQL
 
 ## 7. Set Up Capistrano
