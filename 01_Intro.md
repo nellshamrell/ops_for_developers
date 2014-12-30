@@ -4,6 +4,10 @@
 
 This tutorial assumes a basic familiarity with Ruby on Rails, the UNIX or OS X command line, and that you have at least deployed an application to a service such as Heroku.
 
+## Sample Rails Application
+
+Please download this [sample Rails application](https://github.com/nellshamrell/widgetworld) - this is the application we will configure and deploy.
+
 You will also need an Ubuntu 14.04 Virtual Machine, see the next section for information on how to get one.
 
 ## Getting a VM
