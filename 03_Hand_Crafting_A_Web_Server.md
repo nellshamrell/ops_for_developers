@@ -335,6 +335,12 @@ Rather than using the postgres user all the time, we're going to create a deploy
 
 Make sure to note the password, you will need it later when configuring your Rails application.
 
+Finally, exit out of the postgres user account.
+
+```bash
+(VM) $ exit
+```
+
 ## 7. Set Up Capistrano
 
 ## 8. Deploying with Capistrano
