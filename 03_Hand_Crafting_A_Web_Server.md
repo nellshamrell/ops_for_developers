@@ -122,7 +122,7 @@ Now that SSH is installed, there are few needed steps to add security to the VM.
 First, on your VM, edit the sshd_config with your editor of choice (here I use vi)
 
 ```bash
-(local) $ sudo vi /etc/ssh/sshd_config
+(VM) $ sudo vi /etc/ssh/sshd_config
 ```
 
 First, to disable root login via ssh change this line
