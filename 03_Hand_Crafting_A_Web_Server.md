@@ -318,7 +318,7 @@ You should see a list of processes.
 
 Install PostgreSQL with:
 ```bash
-(VM) $ sudo apt-get install postgresql postgresql-contrib libpq-dev
+(VM) $ sudo apt-get install postgresql
 ```
 
 ## 7. Set Up Capistrano
