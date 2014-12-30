@@ -70,7 +70,7 @@ Leave your vagrant machine running, but open a new terminal shell on your local 
 
 SSH into your VM from the new shell as the deploy user following the appropriate guidelines below.
 
-Vagrant VMs are a little complicated to ssh into outside of the normal vagrant commands.  In the same directory as your Vagrant file run:
+Vagrant VMs are a little complicated to ssh into outside of the normal vagrant commands.  In the same directory as your Vagrant file (but NOT within the Vagrant machine itself) run:
 
 ```bash
 (local) $ vagrant ssh-config > vagrant-ssh
