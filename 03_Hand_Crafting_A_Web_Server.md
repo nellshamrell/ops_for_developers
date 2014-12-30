@@ -321,6 +321,20 @@ Install PostgreSQL with:
 (VM) $ sudo apt-get install postgresql
 ```
 
+By default, PostgreSQL will create a postgres user.  Let's switch to this user.
+
+```bash
+(VM) $ sudo -u postgres -s
+```
+
+Rather than using the postgres user all the time, we're going to create a deploy user our application will use to connect to the database.
+
+```bash
+(VM) $ createuser deploy --pwprompt
+```
+
+Make sure to note the password, you will need it later when configuring your Rails application.
+
 ## 7. Set Up Capistrano
 
 ## 8. Deploying with Capistrano
