@@ -82,7 +82,29 @@ Open vagrant ssh with your favorite text editor.  My favorite is vi/vim.
 (local) $ vim vagrant-ssh
 ```
 
-Change the User to deploy then change the IdentityFile to the path to your private ssh key (NOT the key itself, just the path).
+Change this
+
+```bash
+User vagrant
+```
+
+To this
+
+```bash
+User deploy
+```
+
+Then change this line
+```bash
+IdentityFile /Users/path/to/vagrant/key
+```
+
+To this - remember, include only the path to your private key, NOT the key itself!
+```bash
+IdentityFile path/to/local/private/rsa/key
+```
+
+Save and quit the file.
 
 Next, ssh into your VM
 ```bash
