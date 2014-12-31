@@ -27,6 +27,20 @@ Add this user to the sudo users group.  This will allow the user to use sudo to 
 (VM) $ sudo adduser deploy sudo
 ```
 
+Next, let's allow the deploy user to use sudo without be prompted for a password.  A great way to do this with recent versions of sudo is to create a sudo config file for the deploy user.
+
+Create the file with your text editor of choice (here I use vi)
+
+```bash
+(VM) $ sudo vi /etc/sudoers.d/deploy
+```
+
+Add this line to the file.
+
+```bash
+deploy ALL=(ALL) NOPASSWD:ALL
+```
+Then save and quit the file.
 Switch to the deploy user account.
 
 ```bash
