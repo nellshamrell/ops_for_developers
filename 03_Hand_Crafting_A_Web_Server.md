@@ -178,8 +178,7 @@ In order to install Ruby on our VM, we first need to add some packages to the sy
 ### Updating and Installing Dependencies
 
 First, update Ubuntu itself by running
- 
-TODO: Troubleshoot why sudo is still requiring password - check info at https://help.ubuntu.com/10.04/serverguide/openssh-server.html
+
 ```bash
 (VM) $ sudo apt-get update
 ```
