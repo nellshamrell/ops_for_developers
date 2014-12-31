@@ -41,7 +41,14 @@ Add this line to the file.
 deploy ALL=(ALL) NOPASSWD:ALL
 ```
 Then save and quit the file.
-Switch to the deploy user account.
+
+And, finally, restart the sudo service so the changes go into affect (yes, we're using sudo to restart the sudo service)
+
+```bash
+(VM) $ sudo service sudo restart
+```
+
+Switch to the deploy user account (you will be prompted for the password you entered for the deploy user above).
 
 ```bash
 (VM) $ su deploy
