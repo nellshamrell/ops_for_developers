@@ -503,8 +503,13 @@ namespace :deploy do
   after :publishing, :restart
 ```
 
+In the changes to config/deploy.rb we specified that we would be deploying our application to a directory in /var/www on the VM.  Since the deploy user will be doing the actual deploy, let's change the owner of this directory to deploy
 
+```bash
+(VM) $ sudo chown deploy:deploy /var/www
+```
 
+To be continued...
 
 ## 8. Deploying with Capistrano
 
