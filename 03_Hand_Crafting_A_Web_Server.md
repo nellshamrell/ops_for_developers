@@ -365,5 +365,42 @@ Finally, exit out of the postgres user account.
 
 ## 7. Set Up Capistrano
 
+Capistrano lives on the local machine you deploy from rather than on the VM itself.  We will be using Capistrano 3 (NOTE: this version of Capistrano is very different from previous versions, be sure you are using version 3!)
+
+If you haven't already, please clone this [sample Rails application](https://github.com/nellshamrell/widgetworld) onto your LOCAL machine, this is the application we will use Capistrano to deploy to our VM.
+
+```bash
+(Local) $ git clone git@github.com:nellshamrell/widgetworld.git
+```
+
+Change into the directory where you cloned this application.
+
+i.e. if you cloned the Rails app into a directory called "widgetworld"
+
+```bash
+(Local) $ cd widgetworld
+```
+Next, let's install Capistrano and some helpful other gems.
+
+In your Gemfile, add these lines
+
+```bash
+group :development do
+  gem 'capistrano',  '~> 3.1'
+  gem 'capistrano-rails', '~> 1.1'
+end
+```
+
+Then run
+```bash
+(Local) $ bundle
+```
+
+There is also some special additional installation for capistrano.  Run this command, which will add some additional Capistrano config files.
+```bash
+(Local) $ cap install
+```
+
+
 ## 8. Deploying with Capistrano
 
