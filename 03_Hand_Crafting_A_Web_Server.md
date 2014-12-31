@@ -292,6 +292,8 @@ If your VM is still running, run this command to reload the configuration to inc
 
 Now, access "http://127.0.0.1:8080/" in a browser and you should see the Apache2 Ubuntu Default Page.  It's a working web server!
 
+NOTE: You may need to redo the "SSHing with Vagrant" steps above to ssh into your VM as deploy (the settings may get overwritten when your VM is reloaded)
+
 ## 5. Install Passenger
 
 First, download and install the Passenger gem
