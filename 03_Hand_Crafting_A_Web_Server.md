@@ -136,9 +136,9 @@ Next, ssh into your VM
 
 ### With Azure
 
-### Securing SSH 
+### Securing SSH
 
-Now that SSH is installed, there are few needed steps to add security to the VM.  
+Now that SSH is installed, there are few needed steps to add security to the VM.
 
 First, on your VM, edit the sshd_config with your editor of choice (here I use vi)
 
@@ -160,7 +160,7 @@ Then, to disable password authentication, change this line
 PasswordAuthentication yes
 ```
 
-to this 
+to this
 ```bash
 PasswordAuthentication no
 ```
@@ -209,7 +209,7 @@ NOTE: If you receive an error "gpg: Can't check signature: public key not found"
 (VM) $ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 ```
 
-Then re-run 
+Then re-run
 
 ```bash
 (VM) $ curl -L https://get.rvm.io | bash -s stable
@@ -253,7 +253,7 @@ ruby 2.1.3p242 (2014-09-19 revision 47630) [x86_64-linux]
 ```bash
 (VM) $ sudo apt-get install apache2
 ```
-Next, we need to verify that Apache is working on the VM.  To do this from the command line, run 
+Next, we need to verify that Apache is working on the VM.  To do this from the command line, run
 
 ```bash
 (VM) $ wget -qO- 127.0.0.1
@@ -275,13 +275,15 @@ To fix this, open up your VagrantFile on your local machine with the editor of y
 
 Locate this line in the Vagrantfile
 ```bash
-# config.vm.network "forwarded_port", guest: 80, host: 8080
+# config.vm.network "private_network", ip: "192.168.33.10"
 ```
 
-Uncomment out that line so it looks like this 
+Uncomment out that line so it looks like this
 ```bash
- config.vm.network "forwarded_port", guest: 80, host: 8080
+ config.vm.network "private_network", ip: "192.168.33.10"
 ```
+
+This assigns an IP address to our Vagrant machine so we can access it in the web browser.
 
 Then save and quit the file.
 
@@ -290,15 +292,13 @@ If your VM is still running, run this command to reload the configuration to inc
  vagrant reload
 ```
 
-Now, access "http://127.0.0.1:8080/" in a browser and you should see the Apache2 Ubuntu Default Page.  It's a working web server!
-
-NOTE: You may need to redo the "SSHing with Vagrant" steps above to ssh into your VM as deploy (the settings may get overwritten when your VM is reloaded)
+Now, access "http://192.168.33.10" in a browser and you should see the Apache2 Ubuntu Default Page.  It's a working web server!
 
 ## 5. Install Passenger
 
 First, download and install the Passenger gem
 ```bash
-(VM) $ gem install passenger 
+(VM) $ gem install passenger
 ```
 
 Use this command to set up Passenger
@@ -452,7 +452,7 @@ set :application, 'my_app_name'
 set :repo_url, 'git@example.com:me/my_repo.git'
 ```
 
-To this 
+To this
 
 ```bash
 set :application, 'widgetworld'
@@ -496,6 +496,7 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
        # This restarts Passenger
+       execute :mkdir, '-p', "#{ release_path }/tmp"
        execute :touch, release_path.join('tmp/restart.txt')
     end
   end
@@ -509,7 +510,97 @@ In the changes to config/deploy.rb we specified that we would be deploying our a
 (VM) $ sudo chown deploy:deploy /var/www
 ```
 
-To be continued...
+Finally, we need to make some changes to config/deploy/production.rb
+
+Change these lines
+
+```bash
+  role :app, %w{deploy@example.com}
+  role :web, %w{deploy@example.com}
+  role :db,  %w{deploy@example.com}
+```
+
+To this
+
+```bash
+  role :app, %w{deploy@192.168.33.10}
+  role :web, %w{deploy@192.168.33.10}
+  role :db,  %w{deploy@192.168.33.10}
+```
+
+And change this line
+
+```bash
+server 'example.com', user: 'deploy', roles: %w{web app}, my_property: :my_value
+```
+
+To this:
+
+```bash
+server 'deploy@192.168.33.10', user: 'deploy', roles: %w{web app}, my_property: :my_value
+```
+
+Remember how we added config/database.yml to .gitignore above so it wouldn't be committed or deployed?  Now we need to create this file on the VM itself.
+
+Create and open this file
+```bash
+(VM) $ vim /var/www/widgetworld/shared/config/database.yml
+```bash
+
+Then copy the contents from config/database.yml in the widgetworld directory on your local machine, then paste them into this file on your VM.
+
+You'll need to make some changes under the 'production' section of database.yml on your VM.
+
+Change the username to "deploy" and the password to whatever password you set for the deploy postgres user when you created it.
+
+It should look like this:
+
+```bash
+production:
+  <<: *default
+  database: widgetworld_production
+  username: deploy
+  password: #{password you set for the deploy user of postgres}
+```
+
+Save and close the file.
+
+To check whether the application is ready to be deployed with capistrano, run
+
+```bash
+  cap production deploy:check
+```
+
+If it does not return an error and exits with a line similar to:
+
+```bash
+DEBUG [7f34dcb9] Finished in 0.004 seconds with exit status 0 (successful).
+```
+
+Then we're ready to deploy!
 
 ## 8. Deploying with Capistrano
 
+Deploy with
+
+```bash
+  cap production deploy
+```
+
+Finally, we need to make Apache aware of our new site.  Add this to
+/etc/apache2/apache2.conf
+
+```bash
+<VirtualHost *:80>
+ServerName 192.168.33.10
+DocumentRoot /var/www/widgetworld/current
+<Directory /var/www/widgetworld/current>
+# This relaxes Apache security settings.
+AllowOverride all
+# MultiViews must be turned off.
+Options -MultiViews
+</Directory>
+</VirtualHost>
+```
+
+TODO: This still doesn't quite work.  Will continue work on it tomorrow.
