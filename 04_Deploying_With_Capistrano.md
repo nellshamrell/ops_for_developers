@@ -246,4 +246,9 @@ Options -MultiViews
 </VirtualHost>
 ```
 
-TODO: This still doesn't quite work.  Will continue work on it tomorrow.
+And restart Apache
+```bash
+(VM) $ sudo service apache2 restart
+```
+
+TODO: This still doesn't quite work - not seeing the rails site itself, just the public directory.  To be continued.
