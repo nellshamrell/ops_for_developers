@@ -232,6 +232,7 @@ First, we install Ruby 2.1.3
 ```bash
 (VM) $ rvm install 2.1.3
 ```
+NOTE- don't worry if you see the message "Unknown ruby string (do not know how to handle): ruby-2.1.3."  Wait a few seconds and see if the install continues, you should see the message "Searching for binary rubies, this might take some time."
 
 Next, we tell RVM to use 2.1.3 as the default Ruby
 ```bash
