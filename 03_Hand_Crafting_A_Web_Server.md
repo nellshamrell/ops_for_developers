@@ -290,7 +290,7 @@ Then save and quit the file.
 
 If your VM is still running, run this command to reload the configuration to include these changes.
 ```bash
- vagrant reload
+$ (Local) vagrant reload
 ```
 
 Now, access "http://192.168.33.10" in a browser and you should see the Apache2 Ubuntu Default Page.  It's a working web server!
