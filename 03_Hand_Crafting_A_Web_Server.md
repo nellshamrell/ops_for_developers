@@ -232,6 +232,7 @@ First, we install Ruby 2.1.3
 ```bash
 (VM) $ rvm install 2.1.3
 ```
+NOTE- don't worry if you see the message "Unknown ruby string (do not know how to handle): ruby-2.1.3."  Wait a few seconds and see if the install continues, you should see the message "Searching for binary rubies, this might take some time."
 
 Next, we tell RVM to use 2.1.3 as the default Ruby
 ```bash
@@ -289,7 +290,7 @@ Then save and quit the file.
 
 If your VM is still running, run this command to reload the configuration to include these changes.
 ```bash
- vagrant reload
+$ (Local) vagrant reload
 ```
 
 Now, access "http://192.168.33.10" in a browser and you should see the Apache2 Ubuntu Default Page.  It's a working web server!

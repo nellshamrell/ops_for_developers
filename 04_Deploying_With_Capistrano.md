@@ -177,7 +177,16 @@ server 'deploy@192.168.33.10', user: 'deploy', roles: %w{web app}, my_property: 
 
 Remember how we added config/database.yml to .gitignore above so it wouldn't be committed or deployed?  Now we need to create this file on the VM itself.
 
-Create and open this file
+
+To check whether the application is ready to be deployed with capistrano, run
+
+```bash
+(Local) $ cap production deploy:check
+```
+
+It will likely error out the first time, telling you that /var/www/widgetworld/shared/config/database.yml does not exist on the VM.  To fix this:
+
+Create and open this file on your VM.
 ```bash
 (VM) $ vim /var/www/widgetworld/shared/config/database.yml
 ```bash
@@ -200,10 +209,9 @@ production:
 
 Save and close the file.
 
-To check whether the application is ready to be deployed with capistrano, run
-
+Run the check again.
 ```bash
-  cap production deploy:check
+(Local) $ cap production deploy:check
 ```
 
 If it does not return an error and exits with a line similar to:
@@ -219,7 +227,7 @@ Then we're ready to deploy!
 Deploy with
 
 ```bash
-  cap production deploy
+(Local) $ cap production deploy
 ```
 
 Finally, we need to make Apache aware of our new site.  Add this to
@@ -238,4 +246,9 @@ Options -MultiViews
 </VirtualHost>
 ```
 
-TODO: This still doesn't quite work.  Will continue work on it tomorrow.
+And restart Apache
+```bash
+(VM) $ sudo service apache2 restart
+```
+
+TODO: This still doesn't quite work - not seeing the rails site itself, just the public directory.  To be continued.
