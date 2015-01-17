@@ -230,8 +230,20 @@ Deploy with
 (Local) $ cap production deploy
 ```
 
+Now, navigate to the site's folder on your VM.
+
+```bash
+(Local) $ cd /var/www/widgetworld/current
+```
+
+And run bundler in this directory.
+
+```bash
+(Local) $ bundle
+```
+
 Finally, we need to make Apache aware of our new site.  Add this to
-/etc/apache2/apache2.conf
+/etc/apache2/apache2.conf in your VM
 
 ```bash
 <VirtualHost *:80>
@@ -251,4 +263,21 @@ And restart Apache
 (VM) $ sudo service apache2 restart
 ```
 
-TODO: This still doesn't quite work - not seeing the rails site itself, just the public directory.  To be continued.
+Navigate back to your site in your browser.
+
+If you receive a passenger error "Could not find a JavaScript runtime", run
+```bash
+(VM) $ sudo apt-get install nodejs
+```
+
+The restart Apache again
+```bash
+(VM) $ sudo service apache2 restart
+```
+
+TO DO:
+
+This is erroring out with this error in the apache logs
+App 16460 stderr: [ 2015-01-17 18:31:39.4816 16546/0x0000000231cc78(Worker 1) utils.rb:84 ]: *** Exception RuntimeError in Rack application object (Missing `secret_key_base` for 'production' environment, set this value in `config/secrets.yml`) (process 16546, thread 0x0000000231cc78(Worker 1)):
+
+Will keep working at it.
