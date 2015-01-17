@@ -75,6 +75,12 @@ config/database.yml
 
 This will keep the database.yml file out of any git commits, histories, or repos.
 
+While we're at it, let's also add config/secrets.yml.  Widget World is a Rails 4 application and Rails 4 added the secrets configuration file to contain credentials.  This is not something we want possible exposed to the world in source control, so add this line to your .gitignore file, then save and close the file.
+
+```bash
+config/secrets.yml
+```
+
 Next, open up the config/deploy.rb file with your favorite text editor
 
 ```bash
@@ -241,6 +247,61 @@ And run bundler in this directory.
 ```bash
 (VM) $ bundle
 ```
+
+Next, we need to add in an environmental variable to be used by our secrets configuration file.  First, copy the contents of the config/secrets.yml file in your local Widget World repository.  Then create this file in the /var/www/widgetworld/current directory on your VM.
+
+```bash
+(VM) $ vim /var/www/widgetworld/current/database.yml
+```
+
+And paste the contents copied from your local repo.
+
+Notice that the file references an environmental variable for the production environment
+
+```bash
+# Do not keep production secrets in the repository,
+# instead read values from the environment.
+production:
+  secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>
+```
+
+Save and quit config/secrets.yml
+
+We need to create this environmental variable.  To do this, we first need to generate a secret key.
+
+Back on the command line in your VM, run this command:
+
+```bash
+(VM) $ RAILS_ENV=production rake secret
+```
+
+This will return a long string to be used as your secret key base.  Copy it.
+
+Now let's create the environmental variable to store this key.  Open up your bash profile in an editor:
+
+```bash
+(VM) $ vi ~/.bash_profile
+```
+
+And add this line to the end of the file
+
+```bash
+(VM) $ export SECRET_KEY_BASE=GENERATED_CODE
+```
+
+Save and close the file, then reload your bash profile
+
+```bash
+(VM) $ export SECRET_KEY_BASE=source ~/.bash_profile
+```
+
+You can then make sure this variable is set correctly by running
+```bash
+(VM) $ echo $SECRET_KEY_BASE
+```
+
+(NOTE: This section of the tutorial was inspired by this [Stack Overflow Response](http://stackoverflow.com/a/26172408)
+
 
 Finally, we need to make Apache aware of our new site.  Add this to
 /etc/apache2/apache2.conf in your VM
