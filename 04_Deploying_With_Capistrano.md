@@ -172,7 +172,7 @@ server 'example.com', user: 'deploy', roles: %w{web app}, my_property: :my_value
 To this:
 
 ```bash
-server 'deploy@192.168.33.10', user: 'deploy', roles: %w{web app}, my_property: :my_value
+server '192.168.33.10', user: 'deploy', roles: %w{web app}, my_property: :my_value
 ```
 
 Remember how we added config/database.yml to .gitignore above so it wouldn't be committed or deployed?  Now we need to create this file on the VM itself.
