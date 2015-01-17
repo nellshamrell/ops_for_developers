@@ -189,7 +189,7 @@ It will likely error out the first time, telling you that /var/www/widgetworld/s
 Create and open this file on your VM.
 ```bash
 (VM) $ vim /var/www/widgetworld/shared/config/database.yml
-```bash
+```
 
 Then copy the contents from config/database.yml in the widgetworld directory on your local machine, then paste them into this file on your VM.
 
