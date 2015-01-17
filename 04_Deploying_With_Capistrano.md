@@ -145,7 +145,7 @@ In the changes to config/deploy.rb we specified that we would be deploying our a
 (VM) $ sudo chown deploy:deploy /var/www
 ```
 
-Finally, we need to make some changes to config/deploy/production.rb
+Finally, we need to make some changes to config/deploy/production.rb (back on your local machine)
 
 Change these lines
 
