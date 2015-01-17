@@ -233,13 +233,13 @@ Deploy with
 Now, navigate to the site's folder on your VM.
 
 ```bash
-(Local) $ cd /var/www/widgetworld/current
+(VM) $ cd /var/www/widgetworld/current
 ```
 
 And run bundler in this directory.
 
 ```bash
-(Local) $ bundle
+(VM) $ bundle
 ```
 
 Finally, we need to make Apache aware of our new site.  Add this to
