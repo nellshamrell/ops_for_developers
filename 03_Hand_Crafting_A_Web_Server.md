@@ -320,6 +320,7 @@ If the installer advises you to add more swap memory, follow the directions to d
 Eventually, the installer will prompt you to add these lines to your Apache configuration file.  Paste these into /etc/apache2/apache2.conf
 
 ```bash
+   LoadModule passenger_module /home/deploy/.rvm/gems/ruby-2.1.3/gems/passenger-4.0.57/buildout/apache2/mod_passenger.so
    <IfModule mod_passenger.c>
      PassengerRoot /home/deploy/.rvm/gems/ruby-2.1.3/gems/passenger-4.0.57
      PassengerDefaultRuby /home/deploy/.rvm/gems/ruby-2.1.3/wrappers/ruby
