@@ -297,7 +297,7 @@ Now, access "http://192.168.33.10" in a browser and you should see the Apache2 U
 
 ## 5. Install Passenger
 
-First, download and install the Passenger gem
+Switch back to your VM.  First, download and install the Passenger gem
 ```bash
 (VM) $ gem install passenger
 ```
