@@ -321,8 +321,8 @@ Eventually, the installer will prompt you to add these lines to your Apache conf
 
 ```bash
    <IfModule mod_passenger.c>
-     PassengerRoot /var/lib/gems/1.9.1/gems/passenger-4.0.56
-     PassengerDefaultRuby /usr/bin/ruby1.9.1
+     PassengerRoot /home/deploy/.rvm/gems/ruby-2.1.3/gems/passenger-4.0.57
+     PassengerDefaultRuby /home/deploy/.rvm/gems/ruby-2.1.3/wrappers/ruby
    </IfModule>
 ```
 
