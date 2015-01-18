@@ -302,7 +302,8 @@ You can then make sure this variable is set correctly by running
 
 Next, create the database for your Rails application and run migrations with these commands
 ```bash
-(VM) $ rake db:create && rake db:migrate
+(VM) $ RAILS_ENV=production rake db:create
+(VM) $ RAILS_ENV=production rake db:migrate
 ```
 
 (NOTE: This section of the tutorial was inspired by this [Stack Overflow Response](http://stackoverflow.com/a/26172408)
