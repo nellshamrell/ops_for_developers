@@ -300,6 +300,11 @@ You can then make sure this variable is set correctly by running
 (VM) $ echo $SECRET_KEY_BASE
 ```
 
+Next, create the database for your Rails application and run migrations with these commands
+```bash
+(VM) $ rake db:create && rake db:migrate
+```
+
 (NOTE: This section of the tutorial was inspired by this [Stack Overflow Response](http://stackoverflow.com/a/26172408)
 
 
@@ -338,7 +343,4 @@ The restart Apache again
 
 TO DO:
 
-This is erroring out with this error in the apache logs
-App 16460 stderr: [ 2015-01-17 18:31:39.4816 16546/0x0000000231cc78(Worker 1) utils.rb:84 ]: *** Exception RuntimeError in Rack application object (Missing `secret_key_base` for 'production' environment, set this value in `config/secrets.yml`) (process 16546, thread 0x0000000231cc78(Worker 1)):
-
-Will keep working at it.
+NOTE: Almost done, having some database access issues, will fix ASAP.
