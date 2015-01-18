@@ -342,6 +342,4 @@ The restart Apache again
 (VM) $ sudo service apache2 restart
 ```
 
-TO DO:
-
-NOTE: Almost done, having some database access issues, will fix ASAP.
+And congratulations!  You now have a working web server that you have deployed your application to and it works!
