@@ -365,4 +365,17 @@ Finally, exit out of the postgres user account.
 (VM) $ exit
 ```
 
+Now, let's enter into Postgres and give the deploy user we just created permission to create a database.  Start up Postgres with this command:
+
+```bash
+(VM) $ sudo -u postgres psql postgres
+```
+
+When the psql prompt appears, enter this command:
+
+```bash
+(VM) $ ALTER USER deploy CREATEDB;
+```
+
+
 And we now have a basic, working web server.  To learn how to use Capistrano to deploy your application to this web server head on over the the next chapter!
