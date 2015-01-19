@@ -26,14 +26,21 @@ There are many types of servers that can be run with Ubuntu (DNS servers, web se
 In this tutorial we will be configuring an Ubuntu *web server*.  There are three main parts that make up a server which can run a Rails application.  We will configure each of these parts shortly.  For now, here is a brief intro to each piece:
 
 ### Web Server
-TODO - Brief explanation
-In this tutorial, we will be using Apache.
+We will be using [Apache](http://httpd.apache.org/) as the software to run our web server.
+
+For an excellent explanation of what a web server is and an intro to Apache, please see [this outstanding article](http://code.tutsplus.com/tutorials/an-introduction-to-apache--net-25786)
 
 ### Application Server
-TODO - Brief explanation
-In this tutorial, we will be using Passenger.
+Apache cannot serve up Rails applications by default.  We need to add an additional service called an application server in order to make it work.
+
+In this tutorial, we will be using [Phusion Passenger](https://www.phusionpassenger.com/).
+
+Confused about the difference between a web server like Apache and an application server like Passenger? You are not alone.  Check out this fantastic [explanation on Stack Overflow](http://stackoverflow.com/a/4113570).
 
 ### Database
-TODO - Brief explanation
-In this tutorial, we will be using PostgreSQL
+Rails applications need a database.  By default, Rails uses SQLite, but in this tutorial we're going to use [PostgreSQL](http://www.postgresql.org/).
+
+SQLite, PostgreSQL, and MySQL are all common databases used with Rails.  For a detailed explanation of the differences among these databases, please see [this article](https://www.digitalocean.com/community/tutorials/sqlite-vs-mysql-vs-postgresql-a-comparison-of-relational-database-management-systems)
+
+Let's move onto the next article and start actually configuring these pieces!
   
