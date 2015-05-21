@@ -120,7 +120,7 @@ Then change this line
 IdentityFile /Users/path/to/vagrant/key
 ```
 
-To this - remember, include only the path to your private key, NOT the key itself!
+To this - remember, include only the path to the file containing your private key, NOT the contents of the key itself!
 ```bash
 IdentityFile path/to/local/private/rsa/key
 ```
