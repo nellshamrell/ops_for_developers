@@ -277,13 +277,18 @@ Back on the command line in your VM, run this command:
 
 This will return a long string to be used as your secret key base.  Copy it.
 
+If you receive a "Could not find a JavaScript runtime" error, run
+```bash
+(VM) $ sudo apt-get install nodejs
+```
+
 Now let's create the environmental variable to store this key.  Open up your bash profile in an editor:
 
 ```bash
 (VM) $ vi ~/.bash_profile
 ```
 
-And add this line to the end of the file
+And add this line to the end of the file, replacing `GENERATED_CODE` with your secret key base.
 
 ```bash
 (VM) $ export SECRET_KEY_BASE=GENERATED_CODE
@@ -292,7 +297,7 @@ And add this line to the end of the file
 Save and close the file, then reload your bash profile
 
 ```bash
-(VM) $ export SECRET_KEY_BASE=source ~/.bash_profile
+(VM) $ source ~/.bash_profile
 ```
 
 You can then make sure this variable is set correctly by running
